@@ -1,0 +1,17 @@
+Package: ggcollapse
+Title: an R package to collapse nodes using ggtree
+Version: 0.0.0.9000
+Authors@R: 
+    person("Moisès", "Bernabeu", , "moises.bernabeu.sci@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0498-5957"))
+Description: This package contains a set of functions that expand the `ggtree` package. The main function of this set, `ggcollapse` allows the user to collapse nodes with the same height for the collapsing triangles. The package also contains some functions that help in the task of finding monophyletic groups of a certain taxonomic rank and the full set of sister clades to a given node.
+Imports:
+    treeio (>= 1.28.0),
+    ape (>= 5.8),
+    phytools (>= 2.3.0),
+    ggtree (>= 3.13.1),
+    methods (>= 4.4.1)
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
