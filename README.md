@@ -8,4 +8,4 @@ devtools::install_github('moibernabeu/ggcollapse')
 ```
 
 # Tutorial
-There will be a tutorial available soon in my moibernabeu.github.io github page.
+There will be a tutorial available soon in the moibernabeu.github.io github page.
