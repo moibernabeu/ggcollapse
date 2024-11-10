@@ -6,22 +6,6 @@ functions that help in the task of finding monophyletic groups of a certain
 taxonomic rank and the full set of sister clades to a given node.
 
 # Installation
-To install this package you can use `devtools`
-```R
-devtools::install_github('moibernabeu/ggcollapse')
-```
-
-# Tutorial
-
-This packages has been programmed to incorporate a function that
-collapses clades obtaining symmetric triangles and collapsed nodes with
-the same size across the tree. However, we also developed some functions
-that help to annotate and find specific nodes in the tree, such as all
-the monophyletic clades of tips belonging to a category or all the
-sister clades to a specific node of the tree. We encourage you to follow the
-tutorial in your 
-
-## Installing `ggcollapse`
 
 To install `ggcollapse`, you just needs to execute the following
 command:
@@ -33,6 +17,8 @@ if (!require('devtools', quietly = TRUE)) {
 
 devtools::install_github('moibernabeu/ggcollapse')
 ```
+
+# Tutorial
 
 ## Data for `ggcollapse`
 
