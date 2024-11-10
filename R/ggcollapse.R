@@ -22,6 +22,10 @@ ggcollapse <- function(tree, nodes, collapse_mode='mixed', node_colours=NULL,
   if (!methods::is(tree, 'phylo')) {
     stop('The tree must be a phylo object.')
   }
+
+  if (is.null(names(nodes))) {
+    stop('The nodes vector must be named.')
+  }
   
   # Get distances from the tree
   dists <- ape::dist.nodes(tree)
