@@ -1,5 +1,5 @@
 #' Annotate the tree
-#' 
+#'
 #' Function to annotate the tree with the data given in the tree information
 #' dataframe 'data'. This dataframe must contain one column with the species
 #' code matching the species code in the headers which is extracted by the
@@ -15,21 +15,24 @@
 #' @author Moisès Bernabeu
 #' @example man/examples/annotate_tree.R
 annotate_tree <- function(tree, tree_data, get_sp, data_sp_column) {
+  if (is_tibble(tree_data)) {
+    tree_data <- data.frame(tree_data)
+  }
   row.names(tree_data) <- tree_data[, data_sp_column]
-  
+
   ttree <- treeio::as_tibble(tree)
   seqids <- ttree$label[1:ape::Ntip(ttree)]
   taxids <- get_sp(seqids)
-  
+
   tree_dat <- treeio::tibble(label = seqids, tree_data[taxids, ])
   otree <- treeio::full_join(ttree, tree_dat, by = 'label')
   otree <- treeio::as.treedata(otree)
-  
+
   return(otree)
 }
 
 #' Check if a node is son
-#' 
+#'
 #' A function to check wether a tip belongs to a specific node.
 #'
 #'
@@ -50,7 +53,7 @@ is_son <- function(tree, parents, son) {
 }
 
 #' Get sisters
-#' 
+#'
 #' Get the number of the ancestor of the sister nodes to a specified node.
 #'
 #' Args:
@@ -101,7 +104,7 @@ get_sisters <- function(tree, node, naming_column=NULL) {
 }
 
 #' Get monophyletic groups
-#' 
+#'
 #' Get the monophyletic groups assigned to a specific column.
 #'
 #' @param tree Phylogenetic tree.
@@ -130,7 +133,7 @@ get_monophyletics <- function(tree, group_column, tree_data=NULL,
     tree_data <- tree_data[tree_data_rows, -c(1:4)]
     row.names(tree_data) <- tree_data_names
   }
-  
+
   ntips <- ape::Ntip(treeio::as.phylo(tree))
   int_nodes <- (ntips + 1):(2 * ntips - 1)
 
@@ -139,15 +142,15 @@ get_monophyletics <- function(tree, group_column, tree_data=NULL,
   for (i in int_nodes) {
     desc <- phytools::getDescendants(treeio::as.phylo(tree), node = i)
     desc_tips <- desc[which(desc <= ntips)]
-    
+
     desc_groups <- unique(tree@data[desc_tips, group_column][[group_column]])
-    
+
     if (length(desc_groups) == 1 & !is_son(tree, monophyletic_groups, i)) {
       monophyletic_groups[j] <- i
       names(monophyletic_groups)[j] <- desc_groups
       j <- j + 1
     }
   }
-  
+
   return(monophyletic_groups)
 }
