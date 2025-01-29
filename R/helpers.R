@@ -22,7 +22,7 @@ annotate_tree <- function(tree, tree_data, get_sp, data_sp_column) {
 
   ttree <- treeio::as_tibble(tree)
   seqids <- ttree$label[1:ape::Ntip(ttree)]
-  taxids <- get_sp(seqids)
+  taxids <- unlist(lapply(seqids, get_sp))
 
   tree_dat <- treeio::tibble(label = seqids, tree_data[taxids, ])
   otree <- treeio::full_join(ttree, tree_dat, by = 'label')
